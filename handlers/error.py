@@ -2,7 +2,6 @@ from app import app
 from slack_bolt.error import BoltUnhandledRequestError
 from slack_bolt import BoltResponse
 
-
 @app.error
 def handle_errors(error, body, logger):
     """ Handles errors that occur during request servicing. 
