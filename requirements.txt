@@ -1,3 +1,4 @@
+altgraph @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/altgraph-0.17.2-py2.py3-none-any.whl
 anyio==3.7.1
 appnope==0.1.4
 argon2-cffi==23.1.0
@@ -28,6 +29,7 @@ executing==1.2.0
 fastjsonschema==2.18.0
 Flask==2.3.2
 fqdn==1.5.1
+future @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/future-0.18.2-py3-none-any.whl
 greenlet==2.0.2
 idna==3.4
 importlib_metadata==8.7.0
@@ -56,6 +58,7 @@ jupyterlab==4.0.5
 jupyterlab-pygments==0.2.2
 jupyterlab-widgets==3.0.8
 jupyterlab_server==2.24.0
+macholib @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/macholib-1.15.2-py2.py3-none-any.whl
 MarkupSafe==2.1.3
 matplotlib-inline==0.1.6
 mistune==3.0.1
@@ -85,7 +88,7 @@ python-dateutil==2.8.2
 python-dotenv==1.0.0
 python-json-logger==2.0.7
 PyYAML==6.0.1
-# pyzmq==25.1.1
+pyzmq==25.1.1
 qtconsole==5.4.3
 QtPy==2.3.1
 referencing==0.30.2
