@@ -19,7 +19,7 @@ app = App(
 import handlers.record
 import handlers.leaderboard
 import handlers.stats
-import handlers.flag
+# import handlers.flag  # Commented out - functionality not implemented yet
 import handlers.misc
 import handlers.error
 

@@ -1,5 +1,5 @@
 import os
-from db.supabase import create_client
+from supabase import create_client
 from dotenv import load_dotenv
 
 # load environemnt variables 

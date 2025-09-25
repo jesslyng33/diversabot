@@ -13,9 +13,9 @@ def find_all_mentions(msg: str) -> list[str]:
     member_ids = re.findall(r'<@([\w]+)>', msg, re.MULTILINE)
     return member_ids
 
-def get_name_from_user_id(user_id : str, slack_app: App):
+def get_name_from_user_id(user_id : str, client):
     """ Gets name from user id."""
-    return slack_app.client.users_info(user=user_id)['user']['real_name']
+    return client.users_info(user=user_id)['user']['real_name']
 
 
 def random_excited_greeting() -> str:

@@ -30,7 +30,7 @@ def record_spot(message, client, logger):
                            spotter=user, 
                            tagged=tagged_users, 
                            semester=SEMESTER_ID, 
-                           falgged=False)
+                           flagged=False)
 
         # Sending confirmation message.
         num_spots = get_num_spots_for_user_id(user, SEMESTER_ID)
