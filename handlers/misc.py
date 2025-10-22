@@ -1,7 +1,7 @@
 from app import app 
 from utils.utils import find_all_mentions
 from utils.blocks import rule_blocks
-@app.message("ping")
+@app.message("diversabot ping")
 def message_pong(message, client):
     """ Ping. Pong. """
     channel_id = message['channel']

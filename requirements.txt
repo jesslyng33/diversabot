@@ -1,36 +1,16 @@
-# Core Flask and web framework
 Flask==2.3.2
 Werkzeug==2.3.6
-
-# Slack SDK
 slack-bolt==1.18.0
 slack-sdk==3.21.3
-
-# Database
 supabase>=2.6.0
 psycopg2-binary==2.9.9
-
-# Environment and configuration
 python-dotenv==1.0.0
-
-# HTTP requests
 requests==2.31.0
 urllib3==1.26.16
-
-# Utilities
 click==8.1.4
 python-dateutil==2.8.2
-
-# Security
 cryptography==41.0.2
 certifi==2023.5.7
-
-# JSON handling
 PyYAML==6.0.1
-
-# Optional: Keep these if you need them for specific features
-# Remove if not needed
 PyMySQL==1.1.0
-
-#Other
 httpx==0.28.1

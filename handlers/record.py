@@ -43,8 +43,6 @@ def record_spot(message, client, logger):
     )
 
 
-
-
 # WIP for future diversabot miss
 # Creating new image file name for S3 bucket.
 # Format: <user_id>_<timestamp>.<filetype>
