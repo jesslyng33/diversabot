@@ -1,4 +1,5 @@
-from app import app, SEMESTER_ID
+from app import SEMESTER_ID
+from boltapp import app
 from datetime import date
 from utils.utils import get_name_from_user_id
 from db.diversaspots import find_rank_by_user_id, get_num_spots_for_user_id, get_times_spotted, get_top_spotter

@@ -1,4 +1,5 @@
-from app import app, SEMESTER_ID
+from app import SEMESTER_ID
+from boltapp import app
 from utils.utils import find_all_mentions, random_disappointed_greeting, random_excited_greeting
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
 

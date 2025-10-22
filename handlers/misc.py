@@ -18,10 +18,6 @@ def post_rules(message, client):
         text="Displaying rules information."
     )
 
-@app.event("message")
-def debug_messages(body, logger):
-    logger.info(f"[DEBUG message] {body}")
-
 
 # WIP 
 # @app.message("diversabot miss")

@@ -1,4 +1,4 @@
-from app import app 
+from boltapp import app
 from slack_bolt.error import BoltUnhandledRequestError
 from slack_bolt import BoltResponse
 

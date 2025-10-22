@@ -1,4 +1,5 @@
-from app import app, SEMESTER_ID, CURRENT_SEMESTER_STRING
+from app import SEMESTER_ID, CURRENT_SEMESTER_STRING
+from boltapp import app
 from utils.utils import get_name_from_user_id 
 from utils.blocks import leaderboard_blocks
 from datetime import date
