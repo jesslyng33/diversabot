@@ -23,9 +23,11 @@ import handlers.stats
 import handlers.misc
 import handlers.error
 
-@app.event("message")
-def debug_messages(body, logger):
-    logger.info(f"[DEBUG message] {body}")
+@app.message("diversabot ping")
+def message_pong(message, client):
+    """ Ping. Pong. """
+    channel_id = message['channel']
+    client.chat_postMessage(channel=channel_id, text="pong")
 
 # ---- Start the bot ----
 if __name__ == "__main__":
