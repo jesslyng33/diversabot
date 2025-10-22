@@ -31,3 +31,6 @@ PyYAML==6.0.1
 # Optional: Keep these if you need them for specific features
 # Remove if not needed
 PyMySQL==1.1.0
+
+#Other
+httpx==0.28.1
