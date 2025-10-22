@@ -12,9 +12,9 @@ def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
     user = message["user"]
     message_ts = message["ts"]
-    logger.info(f"TIMESTAMP_1: {message_ts}")
+    print(f"TIMESTAMP_1: {message_ts}")
     ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
-    logger.info(f"TIMESTAMP_2: {ts}")
+    print(f"TIMESTAMP_2: {ts}")
     channel_id = message["channel"]
     text: str = message["text"]
     tagged_users: list[str] = find_all_mentions(text)
