@@ -1,19 +1,12 @@
 # main.py
 import os
 from dotenv import load_dotenv
-from slack_bolt import App
+from boltapp import app
 
 SEMESTER_ID = 'fs25'
 CURRENT_SEMESTER_STRING= 'Fall 2025'
 # Load environment variables
 load_dotenv(".env")
-
-# Initialize Slack app
-app = App(
-    token=os.environ.get("SLACK_BOT_TOKEN"),
-    signing_secret=os.environ.get("SLACK_SIGNING_SECRET"),
-    # raise_error_for_unhandled_request=True,
-)
 
 # ---- Import handlers so their @app decorators register ----
 import handlers.record
@@ -22,12 +15,6 @@ import handlers.stats
 # import handlers.flag  # Commented out - functionality not implemented yet
 import handlers.misc
 import handlers.error
-
-@app.message("diversabot ping")
-def message_pong(message, client):
-    """ Ping. Pong. """
-    channel_id = message['channel']
-    client.chat_postMessage(channel=channel_id, text="pong")
 
 # ---- Start the bot ----
 if __name__ == "__main__":
