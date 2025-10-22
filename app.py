@@ -23,6 +23,10 @@ import handlers.stats
 import handlers.misc
 import handlers.error
 
+@app.event("message")
+def debug_messages(body, logger):
+    logger.info(f"[DEBUG message] {body}")
+
 # ---- Start the bot ----
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 3000))
