@@ -12,7 +12,7 @@ load_dotenv(".env")
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
     signing_secret=os.environ.get("SLACK_SIGNING_SECRET"),
-    raise_error_for_unhandled_request=True,
+    # raise_error_for_unhandled_request=True,
 )
 
 # ---- Import handlers so their @app decorators register ----
