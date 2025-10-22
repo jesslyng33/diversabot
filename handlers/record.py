@@ -12,9 +12,7 @@ def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
     user = message["user"]
     message_ts = message["ts"]
-    print(f"TIMESTAMP_1: {message_ts}")
     ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
-    print(f"TIMESTAMP_2: {ts}")
     channel_id = message["channel"]
     text: str = message["text"]
     tagged_users: list[str] = find_all_mentions(text)
@@ -31,7 +29,7 @@ def record_spot(message, client, logger):
         
     else:
         logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")   
-        insert_diversaspot(timestamp=ts, 
+        insert_diversaspot(timestamp=ts.isoformat(), 
                            spotter=user, 
                            tagged=tagged_users, 
                            semester=SEMESTER_ID, 
