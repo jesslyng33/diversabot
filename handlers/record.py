@@ -2,6 +2,7 @@ from app import SEMESTER_ID
 from boltapp import app
 from utils.utils import find_all_mentions, random_disappointed_greeting, random_excited_greeting
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
+from datetime import datetime, timezone
 
 @app.event({
     "type" : "message",
@@ -11,6 +12,7 @@ def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
     user = message["user"]
     message_ts = message["ts"]
+    ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
     channel_id = message["channel"]
     text: str = message["text"]
     tagged_users: list[str] = find_all_mentions(text)
@@ -26,8 +28,8 @@ def record_spot(message, client, logger):
                 "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
         
     else:
-        logger.info(f"Recording DiversaSpot from user {user} at timestamp {message_ts}.")   
-        insert_diversaspot(timestamp=message_ts, 
+        logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")   
+        insert_diversaspot(timestamp=ts, 
                            spotter=user, 
                            tagged=tagged_users, 
                            semester=SEMESTER_ID, 
