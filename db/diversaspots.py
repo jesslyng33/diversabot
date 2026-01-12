@@ -1,6 +1,5 @@
 from db.supabase import supabase_client
 
-
 # get_num_spots_for_user_id
 def get_num_spots_for_user_id(user_id, curr_semester): 
     res = supabase_client.rpc(
