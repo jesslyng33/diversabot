@@ -15,6 +15,7 @@ import handlers.diversaspots.stats
 # import handlers.flag  # Commented out - functionality not implemented yet
 import handlers.diversaspots.misc
 import handlers.diversaspots.error
+import handlers.deltatau.misc
 
 # ---- Start the bot ----
 if __name__ == "__main__":
