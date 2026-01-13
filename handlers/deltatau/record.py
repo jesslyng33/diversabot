@@ -39,3 +39,5 @@ def record_challenge(message, client, logger):
         channel=channel_id,
         thread_ts=message_ts,
         text=reply)
+    
+    #hai
