@@ -1,7 +1,7 @@
 from app import SEMESTER_ID
 from boltapp import app
 from utils.utils import find_all_mentions, random_disappointed_greeting, random_excited_greeting
-from db.diversaspots import insert_deltatau, get_num_spots_for_user_id
+from db.diversaspots import insert_deltatau, get_num_points_for_user_id
 from datetime import datetime, timezone
 
 @app.event({
@@ -17,7 +17,7 @@ def record_challenge(message, client, logger):
     text: str = message["text"]
 
     # checking for point value
-    if type(text) != int:
+    if type(text) != int:                                         
         logger.info(f"User {user} did not list just the point value in their message.")
         reply = f"{random_disappointed_greeting()} <@{user}>, this challenge won't count " + \
             "because your message had something other than just point value! Delete and try again."
@@ -34,3 +34,8 @@ def record_challenge(message, client, logger):
                                  points = int(text),
                                  semester = SEMESTER_ID,
                                  flagged=False)
+
+    client.chat_postMessage(
+        channel=channel_id,
+        thread_ts=message_ts,
+        text=reply)

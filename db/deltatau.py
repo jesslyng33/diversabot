@@ -1,11 +1,13 @@
 from db.supabase import supabase_client
 
 # get_num_points_for_user_id
+
 def get_num_points_for_user_id(user_id, curr_semester):
     res1 = supabase_client.rpc(
         "get_num_points_for_user_id",
         {"in_user_id": user_id, "in_semester": curr_semester}).execute()
-    return res1.data # int
+    return sum(res1.data) # int
+    # is this legal lol
 
 # leaderboard
 def get_ranked_leaderboard(curr_semester):

@@ -26,7 +26,8 @@ def record_spot(message, client, logger):
         logger.info(f"User {user} did not attach a JPG, HEIC, or a PNG file.")
         reply = f"{random_disappointed_greeting()} <@{user}>, This DiversaSpot doesn't count because you " + \
                 "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
-        
+    # add another elif here to redirect to deltatau bot if attached is
+    # an integer and an image  
     else:
         logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")   
         insert_diversaspot(timestamp=ts.isoformat(), 
