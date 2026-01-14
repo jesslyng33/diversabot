@@ -10,10 +10,18 @@ from datetime import datetime, timezone
 })
 def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
+    channel_id = message["channel"]
+
+    # only process in diversaspot or diversaspot-test
+    DIVERSASPOT_CHANNEL_ID = 'CT88GU87Q'
+    DIVERSASPOT_TEST_CHANNEL_ID = 'C09GFABA58C'
+
+    if channel_id != DIVERSASPOT_CHANNEL_ID and channel_id != DIVERSASPOT_TEST_CHANNEL_ID:
+        return
+
     user = message["user"]
     message_ts = message["ts"]
     ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
-    channel_id = message["channel"]
     text: str = message["text"]
     tagged_users: list[str] = find_all_mentions(text)
     
