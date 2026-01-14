@@ -3,7 +3,7 @@ from boltapp import app
 from utils.utils import get_name_from_user_id 
 from utils.blocks import leaderboard_blocks
 from datetime import date
-from db.diversaspots import get_ranked_leaderboard
+from db.deltatau import get_ranked_leaderboard
 
 @app.message("deltatau leaderboard")
 def post_leaderboard(message, client):
