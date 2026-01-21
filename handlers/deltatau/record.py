@@ -5,10 +5,7 @@ from db.deltatau import insert_deltatau, get_num_points_for_user_id
 from datetime import datetime, timezone
 
 
-@app.event({
-    "type": "message",
-    "subtype": "file_share"
-})
+@app.event('message')
 def record_challenge(message, client, logger):
     """
     Records a New Mem (DeltaTau) Challenge entry.
@@ -16,7 +13,11 @@ def record_challenge(message, client, logger):
     That number is added to the user's total points (via inserting a row with that points value).
     """
     logger.info(f"[DELTATAU] record_challenge handler triggered for channel {message.get('channel')}")
-
+   
+    if message.get('subtype') != 'file_share':
+        return
+    logger.info(f'[DELTATAU] record_spot handler triggered for channel {message.get('channel')}')
+    
     # Basic info from Slack
     channel_id = message.get("channel")
 

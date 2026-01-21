@@ -4,23 +4,26 @@ from utils.utils import find_all_mentions, random_disappointed_greeting, random_
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
 from datetime import datetime, timezone
 
-@app.event({
-    "type" : "message",
-    "subtype" : "file_share"
-})
+@app.event("message")
 def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
-    logger.info(f"[DIVERSASPOT] record_spot handler triggered for channel {message.get('channel')}")
-    channel_id = message["channel"]
+    # only handle file_share messages
+
+    channel_id = message.get('channel')
 
     # only process in diversaspot or diversaspot-test
     DIVERSASPOT_CHANNEL_ID = 'CT88GU87Q'
     DIVERSASPOT_TEST_CHANNEL_ID = 'C09GFABA58C'
 
     if channel_id != DIVERSASPOT_CHANNEL_ID and channel_id != DIVERSASPOT_TEST_CHANNEL_ID:
+        logger.info(f"[DIVERSASPOT] Ignoring message from channel {channel_id}")
         return
-    logger.info(f"[DIVERSASPOT] Ignoring message from channel {channel_id}")
-    
+        
+    if message.get('subtype') != 'file_share':
+        return
+
+    logger.info(f'[DELTATAU] record_spot handler triggered for channel {message.get('channel')}')
+
     user = message["user"]
     message_ts = message["ts"]
     ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
