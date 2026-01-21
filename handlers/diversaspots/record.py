@@ -23,11 +23,18 @@ def record_spot(message, client, logger):
         logger.info(f"[DIVERSASPOT] Ignoring message from channel {channel_id}")
         return
         
-    user = message["user"]
-    message_ts = message["ts"]
-    ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
-    text: str = message["text"]
-    tagged_users: list[str] = find_all_mentions(text)
+    user = message.get("user")
+    message_ts = message.get("ts")
+
+    ts_raw = message.get("ts")
+    ts = (
+        datetime.fromtimestamp(float(ts_raw), tz=timezone.utc)
+        if ts_raw is not None
+        else None
+)
+
+text: str = message.get("text", "")
+tagged_users: list[str] = find_all_mentions(text)
     
     if len(tagged_users) == 0:
         logger.info(f"User {user} did not tag anyone in their DiversaSpot.")
