@@ -8,6 +8,10 @@ from datetime import datetime, timezone
 def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
     # only handle file_share messages
+    if message.get('subtype') != 'file_share':
+        return
+
+    logger.info(f"[DIVERSASPOT] record_spot handler triggered for channel {message.get('channel')}")
 
     channel_id = message.get('channel')
 
@@ -19,11 +23,6 @@ def record_spot(message, client, logger):
         logger.info(f"[DIVERSASPOT] Ignoring message from channel {channel_id}")
         return
         
-    if message.get('subtype') != 'file_share':
-        return
-
-    logger.info(f'[DELTATAU] record_spot handler triggered for channel {message.get('channel')}')
-
     user = message["user"]
     message_ts = message["ts"]
     ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
