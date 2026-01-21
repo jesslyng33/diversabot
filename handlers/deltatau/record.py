@@ -14,9 +14,9 @@ def record_challenge(message, client, logger):
     """
     logger.info(f"[DELTATAU] record_challenge handler triggered for channel {message.get('channel')}")
    
-    if message.get('subtype') != 'file_share':
-        return
-    logger.info(f"[DELTATAU] record_spot handler triggered for channel {message.get('channel')}")
+    # if message.get('subtype') != 'file_share':
+    #     return
+    # logger.info(f"[DELTATAU] record_spot handler triggered for channel {message.get('channel')}")
     
     # Basic info from Slack
     channel_id = message.get("channel")
