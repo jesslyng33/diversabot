@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 })
 def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
+    logger.info(f"[DIVERSASPOT] record_spot handler triggered for channel {message.get('channel')}")
     channel_id = message["channel"]
 
     # only process in diversaspot or diversaspot-test
@@ -18,7 +19,8 @@ def record_spot(message, client, logger):
 
     if channel_id != DIVERSASPOT_CHANNEL_ID and channel_id != DIVERSASPOT_TEST_CHANNEL_ID:
         return
-
+    logger.info(f"[DIVERSASPOT] Ignoring message from channel {channel_id}")
+    
     user = message["user"]
     message_ts = message["ts"]
     ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)

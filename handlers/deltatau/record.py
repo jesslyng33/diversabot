@@ -15,6 +15,7 @@ def record_challenge(message, client, logger):
     Rule: message text must be JUST a whole number (like "7") AND an image must be attached.
     That number is added to the user's total points (via inserting a row with that points value).
     """
+    logger.info(f"[DELTATAU] record_challenge handler triggered for channel {message.get('channel')}")
 
     # Basic info from Slack
     channel_id = message.get("channel")
@@ -24,6 +25,7 @@ def record_challenge(message, client, logger):
     DELTATAU_CHANNEL_ID = 'C32NG7H2T'
 
     if channel_id != DELTATAU_TEST_CHANNEL_ID and channel_id != DELTATAU_CHANNEL_ID:
+        logger.info(f"[DELTATAU] Ignoring message from channel {channel_id}")
         return
 
     user = message.get("user")
