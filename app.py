@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from slack_bolt import App
 
-SEMESTER_ID = 'fs25'
+SEMESTER_ID = 'sp26'
 CURRENT_SEMESTER_STRING= 'Fall 2025'
 # Load environment variables
 load_dotenv(".env")
