@@ -1,4 +1,5 @@
-from app import app, SEMESTER_ID
+from app import SEMESTER_ID
+from boltapp import app
 from datetime import date
 from utils.utils import get_name_from_user_id
 from db.diversaspots import find_rank_by_user_id, get_num_spots_for_user_id, get_times_spotted, get_top_spotter
@@ -24,11 +25,11 @@ def post_stats(message, client):
              message_text_2 = ":camera_with_flash: No one has spotted you yet ... so sneaky of you!"
         else:
             top_spotter_id, top_spotter_num_spots = get_top_spotter(user_id, SEMESTER_ID)
-            message_text_2 = f":camera_with_flash: You've been spotted a total of {num_spots} " + \
-            f"times!\n\n:heart_eyes: *{get_name_from_user_id(top_spotter_id, app)}* has spotted you " + \
+            message_text_2 = f":camera_with_flash: You've been spotted a total of {times_spotted} " + \
+            f"times!\n\n:heart_eyes: *{get_name_from_user_id(top_spotter_id, client)}* has spotted you " + \
             f"the most with {top_spotter_num_spots} spots."
     
-    blocks = stat_blocks(date.today(), get_name_from_user_id(user_id, app), message_text_1, message_text_2)
+    blocks = stat_blocks(date.today(), get_name_from_user_id(user_id, client), message_text_1, message_text_2)
     
     client.chat_postMessage(
         channel=channel_id,

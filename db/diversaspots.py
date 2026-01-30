@@ -1,5 +1,4 @@
-from supabase import supabase_client
-
+from db.supabase import supabase_client
 
 # get_num_spots_for_user_id
 def get_num_spots_for_user_id(user_id, curr_semester): 
@@ -19,13 +18,13 @@ def get_ranked_leaderboard(curr_semester):
 # insert diversaspot into db 
 def insert_diversaspot(timestamp, spotter, tagged, semester, flagged=False): 
     # insert logic for auto flagging # 
-    supabase_client.table('diversaspots').insert(
-        {timestamp, 
-         spotter, 
-         tagged, 
-         semester, 
-         flagged}
-         ).execute()
+    supabase_client.table('diversaspots').insert({
+        'timestamp': timestamp, 
+        'spotter': spotter, 
+        'tagged': tagged, 
+        'semester': semester, 
+        'flagged': flagged
+    }).execute()
 
 # finds rank for the specific user_id
 def find_rank_by_user_id(user_id, curr_semester): 

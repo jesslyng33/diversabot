@@ -1,18 +1,40 @@
-from app import app, SEMESTER_ID
+from app import SEMESTER_ID
+from boltapp import app
 from utils.utils import find_all_mentions, random_disappointed_greeting, random_excited_greeting
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
+from datetime import datetime, timezone
 
-@app.event({
-    "type" : "message",
-    "subtype" : "file_share"
-})
+@app.event("message")
 def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
-    user = message["user"]
-    message_ts = message["ts"]
-    channel_id = message["channel"]
-    text: str = message["text"]
-    tagged_users: list[str] = find_all_mentions(text)
+    # only handle file_share messages
+    if message.get('subtype') != 'file_share':
+        return
+
+    logger.info(f"[DIVERSASPOT] record_spot handler triggered for channel {message.get('channel')}")
+
+    channel_id = message.get('channel')
+
+    # only process in diversaspot or diversaspot-test
+    DIVERSASPOT_CHANNEL_ID = 'CT88GU87Q'
+    DIVERSASPOT_TEST_CHANNEL_ID = 'C09GFABA58C'
+
+    if channel_id != DIVERSASPOT_CHANNEL_ID and channel_id != DIVERSASPOT_TEST_CHANNEL_ID:
+        logger.info(f"[DIVERSASPOT] Ignoring message from channel {channel_id}")
+        return
+        
+    user = message.get("user")
+    message_ts = message.get("ts")
+
+    ts_raw = message.get("ts")
+    ts = (
+        datetime.fromtimestamp(float(ts_raw), tz=timezone.utc)
+        if ts_raw is not None
+        else None
+)
+
+text: str = message.get("text", "")
+tagged_users: list[str] = find_all_mentions(text)
     
     if len(tagged_users) == 0:
         logger.info(f"User {user} did not tag anyone in their DiversaSpot.")
@@ -23,14 +45,15 @@ def record_spot(message, client, logger):
         logger.info(f"User {user} did not attach a JPG, HEIC, or a PNG file.")
         reply = f"{random_disappointed_greeting()} <@{user}>, This DiversaSpot doesn't count because you " + \
                 "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
-        
+    # add another elif here to redirect to deltatau bot if attached is
+    # an integer and an image  
     else:
-        logger.info(f"Recording DiversaSpot from user {user} at timestamp {message_ts}.")   
-        insert_diversaspot(timestamp=message_ts, 
+        logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")   
+        insert_diversaspot(timestamp=ts.isoformat(), 
                            spotter=user, 
                            tagged=tagged_users, 
                            semester=SEMESTER_ID, 
-                           falgged=False)
+                           flagged=False)
 
         # Sending confirmation message.
         num_spots = get_num_spots_for_user_id(user, SEMESTER_ID)
@@ -41,8 +64,6 @@ def record_spot(message, client, logger):
         thread_ts=message_ts,
         text=reply
     )
-
-
 
 
 # WIP for future diversabot miss

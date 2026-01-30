@@ -1,7 +1,7 @@
-from app import app 
+from boltapp import app
 from utils.utils import find_all_mentions
-from utils.blocks import rule_blocks
-@app.message("ping")
+from utils.blocks import rule_blocks, help_blocks
+@app.message("diversabot ping")
 def message_pong(message, client):
     """ Ping. Pong. """
     channel_id = message['channel']
@@ -18,7 +18,16 @@ def post_rules(message, client):
         text="Displaying rules information."
     )
 
-
+@app.message("diversabot help")
+def post_help(message, client):
+    """Diversabot's commands"""
+    channel_id = message["channel"]
+    blocks = help_blocks()
+    client.chat_postMessage(
+        channel=channel_id,
+        blocks=blocks,
+        text="Information on Diversabot's commands."
+    )
 
 
 # WIP 
