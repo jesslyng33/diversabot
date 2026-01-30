@@ -3,13 +3,9 @@ import os
 from dotenv import load_dotenv
 from boltapp import app
 
-<<<<<<< HEAD
-SEMESTER_ID = 'sp26'
-CURRENT_SEMESTER_STRING= 'Fall 2025'
-=======
+
 SEMESTER_ID = 's26'
 CURRENT_SEMESTER_STRING= 'Spring 2026'
->>>>>>> f04ce1f2ebf25fcfcee5d26455ecb2f050760fb3
 # Load environment variables
 load_dotenv(".env")
 
