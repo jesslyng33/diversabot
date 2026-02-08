@@ -31,10 +31,10 @@ def record_spot(message, client, logger):
         datetime.fromtimestamp(float(ts_raw), tz=timezone.utc)
         if ts_raw is not None
         else None
-)
+    )
 
-text: str = message.get("text", "")
-tagged_users: list[str] = find_all_mentions(text)
+    text: str = message.get("text", "")
+    tagged_users: list[str] = find_all_mentions(text)
     
     if len(tagged_users) == 0:
         logger.info(f"User {user} did not tag anyone in their DiversaSpot.")
