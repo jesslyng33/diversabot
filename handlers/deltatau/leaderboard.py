@@ -16,11 +16,11 @@ def post_leaderboard(message, client):
     for entry in leaderboard:
         rank = entry["rank"]
         user_id = entry["user_id"]
-        num_spots = entry["num_spots"]
+        num_points = entry["num_points"]
 
         # Slack user lookup
         name = get_name_from_user_id(user_id, client)
-        message_text += f"*#{rank}: {name}* with {num_spots} spots\n"
+        message_text += f"*#{rank}: {name}* with {num_points} points\n"
 
     blocks = leaderboard_blocks(date.today(), message_text, CURRENT_SEMESTER_STRING)
 
