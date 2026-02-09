@@ -144,13 +144,13 @@ def stat_blocks(date: date, name:str, message_text_1: str, message_text_2: str):
     ]
 
 
-def leaderboard_blocks(date: date, message_text: str, current_semester: str):
+def leaderboard_blocks(date: date, message_text: str, current_semester: str, title: str = "DiversaSpot Leaderboard"):
     return [
 		{
 			"type": "header",
 			"text": {
 				"type": "plain_text",
-				"text": f":trophy:  DiversaSpot Leaderboard for {current_semester} :trophy:"
+				"text": f":trophy:  {title} for {current_semester} :trophy:"
 			}
 		},
 		{

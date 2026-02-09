@@ -22,7 +22,7 @@ def post_leaderboard(message, client):
         name = get_name_from_user_id(user_id, client)
         message_text += f"*#{rank}: {name}* with {num_points} points\n"
 
-    blocks = leaderboard_blocks(date.today(), message_text, CURRENT_SEMESTER_STRING)
+    blocks = leaderboard_blocks(date.today(), message_text, CURRENT_SEMESTER_STRING, title="DeltaTau Leaderboard")
 
     client.chat_postMessage(
         channel=channel_id,
