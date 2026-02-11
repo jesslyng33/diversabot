@@ -19,6 +19,7 @@ import handlers.diversaspots.error
 import handlers.deltatau.misc
 import handlers.deltatau.leaderboard
 import handlers.deltatau.record
+import handlers.deltatau.flag
 
 # ---- Start the bot ----
 if __name__ == "__main__":

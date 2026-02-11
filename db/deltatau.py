@@ -28,3 +28,18 @@ def insert_deltatau(ts, new_mem, points, semester, flagged=False):
     'semester': semester,
     'flagged': flagged
     }).execute()
+
+# get a deltatau entry by timestamp
+def get_deltatau_by_ts(ts):
+    res = supabase_client.table('deltatau').select('*').eq('ts', ts).execute()
+    if res.data and len(res.data) > 0:
+        return res.data[0]
+    return None
+
+# flag a deltatau entry
+def flag_deltatau(ts):
+    supabase_client.table('deltatau').update({'flagged': True}).eq('ts', ts).execute()
+
+# unflag a deltatau entry
+def unflag_deltatau(ts):
+    supabase_client.table('deltatau').update({'flagged': False}).eq('ts', ts).execute()
