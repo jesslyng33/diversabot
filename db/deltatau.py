@@ -4,23 +4,23 @@ from db.supabase import supabase_client
 
 def get_num_points_for_user_id(user_id, curr_semester):
     res = supabase_client.table('deltatau') \
-        .select('points') \
+        .select('points, flagged') \
         .eq('new_mem', user_id) \
         .eq('semester', curr_semester) \
-        .eq('flagged', False) \
         .execute()
-    return sum(row['points'] for row in res.data) if res.data else 0
+    return sum(row['points'] for row in (res.data or []) if not row.get('flagged'))
 
 # leaderboard
 def get_ranked_leaderboard(curr_semester):
     res = supabase_client.table('deltatau') \
-        .select('new_mem, points') \
+        .select('new_mem, points, flagged') \
         .eq('semester', curr_semester) \
-        .eq('flagged', False) \
         .execute()
-    # aggregate points per user
+    # aggregate points per user, skipping flagged entries
     totals = {}
     for row in (res.data or []):
+        if row.get('flagged'):
+            continue
         uid = row['new_mem']
         totals[uid] = totals.get(uid, 0) + row['points']
     # sort descending and take top 10
