@@ -40,7 +40,7 @@ def post_deltatau_rules(message, client):
         "Posts in other channels will not count.\n\n"
 
         "*Rule 6:* If you think someone's submission is invalid, send 'deltatau flag.' "
-        "Flagged messages' points will not count'.\n\n"
+        "Flagged messages' points will not count.\n\n"
 
         "*Rule 7:* The leaderboard is determined by total accumulated points at the end of New Mem Challenges. "
     )
