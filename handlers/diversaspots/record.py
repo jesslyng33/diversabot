@@ -4,7 +4,7 @@ from utils.utils import find_all_mentions, random_disappointed_greeting, random_
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
 from datetime import datetime, timezone
 
-@app.event("message")
+@app.message()
 def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
     # only handle file_share messages
