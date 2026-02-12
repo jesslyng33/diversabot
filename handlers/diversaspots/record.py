@@ -4,7 +4,7 @@ from utils.utils import find_all_mentions, random_disappointed_greeting, random_
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
 from datetime import datetime, timezone
 
-@app.message()
+@app.event("message")
 def record_spot(message, client, logger):
     """ Records a DiversaSpot. """
     # only handle file_share messages
@@ -50,63 +50,31 @@ def record_spot(message, client, logger):
         else None
     )
 
-    if ts is None:
-        ts = datetime.now(tz=timezone.utc)
-
     text: str = message.get("text", "")
     tagged_users: list[str] = find_all_mentions(text)
-
-    files = message.get('files', [])
-
+    
     if len(tagged_users) == 0:
         logger.info(f"User {user} did not tag anyone in their DiversaSpot.")
         reply = f"{random_disappointed_greeting()} <@{user}>, this DiversaSpot doesn't count " + \
                 "because you didn't mention anyone! Delete and try again."
-
-    elif not files:
-        logger.info(f"User {user} did not attach any file.")
-        reply = f"{random_disappointed_greeting()} <@{user}>, this DiversaSpot doesn't count because you " + \
-                "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
-
-    elif files[0].get('filetype', '') not in ['jpg', 'png', 'heic']:
-        logger.info(f"User {user} did not attach a JPG, HEIC, or a PNG file.")
-        reply = f"{random_disappointed_greeting()} <@{user}>, this DiversaSpot doesn't count because you " + \
-                "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
-
-    else:
-        logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")
-        insert_diversaspot(timestamp=ts.isoformat(),
-                        spotter=user,
-                        tagged=tagged_users,
-                        semester=SEMESTER_ID,
-                        flagged=False)
-
-    # Sending confirmation message.
-    num_spots = get_num_spots_for_user_id(user, SEMESTER_ID)
-    reply = f"{random_excited_greeting()} <@{user}>, you now have {num_spots} DiversaSpots!"
-    
-    # if len(tagged_users) == 0:
-    #     logger.info(f"User {user} did not tag anyone in their DiversaSpot.")
-    #     reply = f"{random_disappointed_greeting()} <@{user}>, this DiversaSpot doesn't count " + \
-    #             "because you didn't mention anyone! Delete and try again."
         
-    # elif (filetype := message['files'][0]['filetype']) != 'jpg' and filetype != 'png' and filetype != 'heic':
-    #     logger.info(f"User {user} did not attach a JPG, HEIC, or a PNG file.")
-    #     reply = f"{random_disappointed_greeting()} <@{user}>, This DiversaSpot doesn't count because you " + \
-    #             "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
-    # # add another elif here to redirect to deltatau bot if attached is
-    # # an integer and an image  
-    # else:
-    #     logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")   
-    #     insert_diversaspot(timestamp=ts.isoformat(), 
-    #                        spotter=user, 
-    #                        tagged=tagged_users, 
-    #                        semester=SEMESTER_ID, 
-    #                        flagged=False)
+    elif (filetype := message['files'][0]['filetype']) != 'jpg' and filetype != 'png' and filetype != 'heic':
+        logger.info(f"User {user} did not attach a JPG, HEIC, or a PNG file.")
+        reply = f"{random_disappointed_greeting()} <@{user}>, This DiversaSpot doesn't count because you " + \
+                "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
+    # add another elif here to redirect to deltatau bot if attached is
+    # an integer and an image  
+    else:
+        logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")   
+        insert_diversaspot(timestamp=ts.isoformat(), 
+                           spotter=user, 
+                           tagged=tagged_users, 
+                           semester=SEMESTER_ID, 
+                           flagged=False)
 
-    #     # Sending confirmation message.
-    #     num_spots = get_num_spots_for_user_id(user, SEMESTER_ID)
-    #     reply = f"{random_excited_greeting()} <@{user}>, you now have {num_spots} DiversaSpots!"
+        # Sending confirmation message.
+        num_spots = get_num_spots_for_user_id(user, SEMESTER_ID)
+        reply = f"{random_excited_greeting()} <@{user}>, you now have {num_spots} DiversaSpots!"
 
     client.chat_postMessage(
         channel=channel_id,
