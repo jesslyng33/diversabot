@@ -6,6 +6,8 @@ from datetime import datetime, timezone
 
 @app.event("message")
 def record_spot(message, client, logger):
+    print(f"Received message: {message.get('text')}") # to check if it's even communicating with the bot
+    
     """ Records a DiversaSpot. """
     # only handle file_share messages
     # if message.get('subtype') != 'file_share':
