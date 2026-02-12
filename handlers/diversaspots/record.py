@@ -14,6 +14,21 @@ def record_spot(message, client, logger):
     # logger.info(f"[DIVERSASPOT] record_spot handler triggered for channel {message.get('channel')}")
 
     channel_id = message.get('channel')
+    logger.info(f"[DIVERSASPOT] Step 1: got channel {channel_id}")
+
+    # after the channel check...
+    logger.info(f"[DIVERSASPOT] Step 2: passed channel check")
+
+    user = message.get('user')
+    message_ts = message.get('ts')
+    logger.info(f"[DIVERSASPOT] Step 3: user={user}, ts={message_ts}")
+
+    text: str = message.get("text", "")
+    tagged_users: list[str] = find_all_mentions(text)
+    logger.info(f"[DIVERSASPOT] Step 4: tagged_users={tagged_users}")
+
+    files = message.get('files', [])
+    logger.info(f"[DIVERSASPOT] Step 5: files={files}")
 
     # only process in diversaspot or diversaspot-test
     DIVERSASPOT_CHANNEL_ID = 'CT88GU87Q'
