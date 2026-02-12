@@ -9,6 +9,7 @@ from db.diversaspots import get_ranked_leaderboard
 def post_leaderboard(message, client):
     """Outputs leaderboard for the current semester."""
     channel_id = message["channel"]
+    client.chat_postMessage(channel=channel_id, text="Leaderboard handler triggered ✅")
 
     leaderboard = get_ranked_leaderboard(SEMESTER_ID)
 
