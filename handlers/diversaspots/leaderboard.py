@@ -11,6 +11,7 @@ def post_leaderboard(message, client):
     channel_id = message["channel"]
 
     leaderboard = get_ranked_leaderboard(SEMESTER_ID)
+    
 
     message_text = ""
     for entry in leaderboard:

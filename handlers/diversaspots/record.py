@@ -22,6 +22,8 @@ def record_spot(message, client, logger):
     if channel_id != DIVERSASPOT_CHANNEL_ID and channel_id != DIVERSASPOT_TEST_CHANNEL_ID:
         logger.info(f"[DIVERSASPOT] Ignoring message from channel {channel_id}")
         return
+    
+    logger.info(f"[DIVERSASPOT] Processing message from channel {channel_id}")
         
     user = message.get("user")
     message_ts = message.get("ts")
