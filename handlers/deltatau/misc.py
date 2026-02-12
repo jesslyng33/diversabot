@@ -39,7 +39,10 @@ def post_deltatau_rules(message, client):
         "*Rule 5:* Submissions must be original and posted in this designated DeltaTau channel. "
         "Posts in other channels will not count.\n\n"
 
-        "*Rule 6:* The leaderboard is determined by total accumulated points at the end of New Mem Challenges. "
+        "*Rule 6:* If you think someone's submission is invalid, send 'deltatau flag' "
+        "Flagged messages' points will not count'.\n\n"
+
+        "*Rule 7:* The leaderboard is determined by total accumulated points at the end of New Mem Challenges. "
     )
 
     client.chat_postMessage(
