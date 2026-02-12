@@ -4,7 +4,7 @@ from utils.utils import find_all_mentions, random_disappointed_greeting, random_
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
 from datetime import datetime, timezone
 
-@app.event("message")
+# @app.event("message")
 def record_spot(message, client, logger):
     print(f"Received message: {message.get('text')}") # to check if it's even communicating with the bot
     
@@ -21,16 +21,16 @@ def record_spot(message, client, logger):
     # after the channel check...
     logger.info(f"[DIVERSASPOT] Step 2: passed channel check")
 
-    user = message.get('user')
-    message_ts = message.get('ts')
-    logger.info(f"[DIVERSASPOT] Step 3: user={user}, ts={message_ts}")
+    # user = message.get('user')
+    # message_ts = message.get('ts')
+    # logger.info(f"[DIVERSASPOT] Step 3: user={user}, ts={message_ts}")
 
-    text: str = message.get("text", "")
-    tagged_users: list[str] = find_all_mentions(text)
-    logger.info(f"[DIVERSASPOT] Step 4: tagged_users={tagged_users}")
+    # text: str = message.get("text", "")
+    # tagged_users: list[str] = find_all_mentions(text)
+    # logger.info(f"[DIVERSASPOT] Step 4: tagged_users={tagged_users}")
 
-    files = message.get('files', [])
-    logger.info(f"[DIVERSASPOT] Step 5: files={files}")
+    # files = message.get('files', [])
+    # logger.info(f"[DIVERSASPOT] Step 5: files={files}")
 
     # only process in diversaspot or diversaspot-test
     DIVERSASPOT_CHANNEL_ID = 'CT88GU87Q'
