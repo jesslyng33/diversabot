@@ -50,6 +50,9 @@ def record_spot(message, client, logger):
         else None
     )
 
+    if ts is None:
+        ts = datetime.now(tz=timezone.utc)
+
     text: str = message.get("text", "")
     tagged_users: list[str] = find_all_mentions(text)
 
