@@ -4,11 +4,53 @@ from utils.utils import find_all_mentions, random_disappointed_greeting, random_
 from db.diversaspots import insert_diversaspot, get_num_spots_for_user_id
 from datetime import datetime, timezone
 
+@app.event({
+    "type" : "message",
+    "subtype" : "file_share"
+})
+def record_spot(message, client, logger):
+    """ Records a DiversaSpot. """
+    user = message["user"]
+    message_ts = message["ts"]
+    ts = datetime.fromtimestamp(float(message["ts"]), tz=timezone.utc)
+    channel_id = message["channel"]
+    text: str = message["text"]
+    tagged_users: list[str] = find_all_mentions(text)
+    
+    if len(tagged_users) == 0:
+        logger.info(f"User {user} did not tag anyone in their DiversaSpot.")
+        reply = f"{random_disappointed_greeting()} <@{user}>, this DiversaSpot doesn't count " + \
+                "because you didn't mention anyone! Delete and try again."
+        
+    elif (filetype := message['files'][0]['filetype']) != 'jpg' and filetype != 'png' and filetype != 'heic':
+        logger.info(f"User {user} did not attach a JPG, HEIC, or a PNG file.")
+        reply = f"{random_disappointed_greeting()} <@{user}>, This DiversaSpot doesn't count because you " + \
+                "didn't attach a JPG, HEIC, or a PNG file! Delete and try again."
+        
+    else:
+        logger.info(f"Recording DiversaSpot from user {user} at timestamp {ts}.")   
+        insert_diversaspot(timestamp=ts.isoformat(), 
+                           spotter=user, 
+                           tagged=tagged_users, 
+                           semester=SEMESTER_ID, 
+                           flagged=False)
+
+        # Sending confirmation message.
+        num_spots = get_num_spots_for_user_id(user, SEMESTER_ID)
+        reply = f"{random_excited_greeting()} <@{user}>, you now have {num_spots} DiversaSpots!"
+
+    client.chat_postMessage(
+        channel=channel_id,
+        thread_ts=message_ts,
+        text=reply
+    )
+
+"""
 # @app.event("message")
 def record_spot(message, client, logger):
     print(f"Received message: {message.get('text')}") # to check if it's even communicating with the bot
     
-    """ Records a DiversaSpot. """
+    # Records a DiversaSpot.
     # only handle file_share messages
     # if message.get('subtype') != 'file_share':
     #     return
@@ -83,7 +125,7 @@ def record_spot(message, client, logger):
         thread_ts=message_ts,
         text=reply
     )
-
+"""
 
 # WIP for future diversabot miss
 # Creating new image file name for S3 bucket.
