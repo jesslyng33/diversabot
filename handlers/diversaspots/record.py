@@ -9,6 +9,7 @@ from datetime import datetime, timezone
     "subtype" : "file_share"
 })
 def record_spot(message, client, logger):
+    print("HERE")
     """ Records a DiversaSpot. """
     user = message["user"]
     message_ts = message["ts"]
