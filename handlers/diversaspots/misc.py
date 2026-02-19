@@ -1,6 +1,7 @@
 from boltapp import app
 from utils.utils import find_all_mentions
 from utils.blocks import rule_blocks, help_blocks
+
 @app.message("diversabot ping")
 def message_pong(message, client):
     """ Ping. Pong. """
