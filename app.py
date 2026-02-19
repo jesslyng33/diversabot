@@ -10,7 +10,7 @@ CURRENT_SEMESTER_STRING= 'Spring 2026'
 load_dotenv(".env")
 
 # ---- Import handlers so their @app decorators register ----
-import handlers.diversaspots.record
+# import handlers.diversaspots.record
 import handlers.diversaspots.leaderboard
 import handlers.diversaspots.stats
 # import handlers.flag  # Commented out - functionality not implemented yet
@@ -18,8 +18,9 @@ import handlers.diversaspots.misc
 import handlers.diversaspots.error
 import handlers.deltatau.misc
 import handlers.deltatau.leaderboard
-import handlers.deltatau.record
+# import handlers.deltatau.record
 import handlers.deltatau.flag
+import handlers.record
 
 # ---- Start the bot ----
 if __name__ == "__main__":
