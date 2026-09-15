@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 from boltapp import app
 
 
-SEMESTER_ID = 's26'
-CURRENT_SEMESTER_STRING= 'Spring 2026'
+SEMESTER_ID = 'f26'
+CURRENT_SEMESTER_STRING = 'Fall 2026'
 # Load environment variables
 load_dotenv(".env")
 
