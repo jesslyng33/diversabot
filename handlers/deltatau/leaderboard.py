@@ -5,6 +5,7 @@ from utils.blocks import leaderboard_blocks
 from datetime import date
 from db.deltatau import get_ranked_leaderboard
 
+# Posts the top 10 DeltaTau point totals for this semester when someone says "deltatau leaderboard"
 @app.message("deltatau leaderboard")
 def post_leaderboard(message, client):
     """Outputs leaderboard for the current semester."""
